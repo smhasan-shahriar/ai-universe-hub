@@ -18,7 +18,7 @@
             colors: {
               clifford: "#da373d",
               colorPrimary: "#EB5757",
-              mainColor: '#111',
+              mainColor: "#111",
             },
           },
         },
@@ -37,28 +37,47 @@
       }
     </style>
   </head>
-  <body class="font-work-sans">
+  <body class="font-work-sans p-12">
     <header class="my-12 text-center">
-      <h1 class="text-5xl text-mainColor font-semibold mb-8">AI Universe Hub</h1>
-      <button class="btn bg-colorPrimary text-white text-xl font-semibold capitalize rounded-2xl">Sort By Date</button>
+      <h1 class="text-5xl text-mainColor font-semibold mb-8">
+        AI Universe Hub
+      </h1>
+      <button
+        class="btn bg-colorPrimary text-white text-xl font-semibold capitalize rounded-2xl"
+      >
+        Sort By Date
+      </button>
     </header>
     <main>
-        <!-- show search result  -->
-        <section>
-            <div id="item-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+      <!-- show search result  -->
+      <section>
+        <!-- loading sign container  -->
+        <div id="loading-circle" class="text-center m-40 hidden">
+          <span class="loading loading-spinner loading-lg"></span>
+        </div>
+        <div
+          id="item-container"
+          class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5"
+        ></div>
+        <div class="mt-12 text-center hidden">
+          <button
+            class="btn bg-colorPrimary text-white text-xl font-semibold capitalize rounded-2xl"
+          >
+            See More
+          </button>
+        </div>
+      </section>
 
-            </div>
-            <div class="text-center"><button class="btn bg-colorPrimary text-white text-xl font-semibold capitalize rounded-2xl">See More</button></div>
-        </section>
+      <!--     
         <section class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
             <div style="border-radius: 16px;
             border: 1px solid rgba(17, 17, 17, 0.10);
             background: #FFF;" class="p-6 space-y-6">
-                <!-- image container -->
+           
                 <div>
                     <img class="rounded-2xl h-[300px] object-cover" src="https://img.olhardigital.com.br/wp-content/uploads/2023/01/chatgpt_assistente.jpg" alt="">
                 </div>
-                <!-- text container  -->
+            
                 <div>
                     <h2 class="text-2xl font-semibold mb-4">Features</h2>
                     <ol class="list-decimal list-inside">
@@ -68,11 +87,13 @@
                     </ol>
                 </div>
                 <hr>
-                <!-- card footer  -->
+              
                 <div class="flex justify-between items-center">
                     <div>
                         <h2 class="text-2xl font-semibold mb-4">ChatGPT</h2>
-                        <p class="font-medium">Date</p>
+                        <div class="font-medium flex">
+                            <img src="frame.svg" alt=""> <span class="ml-2"> 11/01/2022</span>
+                        </div>
                     </div>
                     <button class="btn btn-circle">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
@@ -81,8 +102,7 @@
                       </button>
                 </div>
             </div>
-        </section>
-
+        </section> -->
     </main>
     <footer></footer>
     <script src="js/index.js"></script>

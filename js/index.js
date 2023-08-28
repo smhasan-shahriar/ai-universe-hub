@@ -1,6 +1,8 @@
 const itemContainer = document.getElementById('item-container');
+const loadingCircle = document.getElementById('loading-circle')
 
 const loadCards = async () =>{
+    loadingSign();
     const response = await fetch(`https://openapi.programming-hero.com/api/ai/tools`);
     const data = await response.json();
     displayCards(data.data.tools);
@@ -36,9 +38,11 @@ const displayCards = (aiCard) => {
                   <h2 class="text-2xl font-semibold mb-4">${card.name}</h2>
                   <p class="font-medium">Date</p>
               </div>
-              <button class="btn btn-circle btn-outline">
-  <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" /></svg>
-</button>
+              <button class="btn btn-circle">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                  <path d="M4.5 12H19.5M19.5 12L12.75 5.25M19.5 12L12.75 18.75" stroke="#EB5757" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </button>
           </div>
       </div>
         
@@ -49,11 +53,15 @@ const displayCards = (aiCard) => {
 
         )
 
-
+    loadingCircle.classList.add('hidden');
     
 
 }
 
 
-// loadCards('02')
+const loadingSign = () =>{
+    loadingCircle.classList.remove('hidden');
+}
+
+loadCards()
 
