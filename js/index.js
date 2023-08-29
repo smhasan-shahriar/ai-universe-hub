@@ -48,11 +48,115 @@ const displayCards = (aiCard, moreClicked) => {
                   <img src="frame.svg" alt=""> <span class="ml-2"> 11/01/2022</span>
               </div>
               </div>
-              <button class="btn btn-circle">
+              <button class="btn btn-circle" onclick="my_modal_${card.id}.showModal()">
               <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
                   <path d="M4.5 12H19.5M19.5 12L12.75 5.25M19.5 12L12.75 18.75" stroke="#EB5757" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
                 </svg>
             </button>
+            <dialog id="my_modal_${card.id}" class="modal">
+            <form method="dialog" class="modal-box max-w-[1250px] relative">
+              <!-- modal left and right side container  -->
+              <div class="grid grid-cols-2 gap-5 p-28">
+                <!-- modal left side container  -->
+                <div
+                  style="
+                    background: rgba(235, 87, 87, 0.05);
+                    border: 1px solid #eb5757;
+                  "
+                  class="w-full rounded-2xl p-8 space-y-6"
+                >
+                  <h2 class="text-2xl font-semibold">
+                    ChatGPT is an AI-powered <br />
+                    chatbot platform that uses <br />
+                    OpenAI's GPT technology to <br />
+                    simulate human conversation.
+                  </h2>
+                  <!-- middle buttons container  -->
+                  <div class="grid grid-cols-3 text-center gap-4">
+                    <p
+                      class="bg-white rounded-2xl text-colorGreen font-bold px-6 py-5"
+                    >
+                      $10/ <br />
+                      month <br />Basic
+                    </p>
+                    <p
+                      style="color: #f28927"
+                      class="bg-white rounded-2xl font-bold px-6 py-5"
+                    >
+                      $50/ <br />
+                      month <br />Pro
+                    </p>
+                    <p
+                      class="bg-white rounded-2xl text-colorPrimary font-bold px-6 py-5"
+                    >
+                      Contact <br />
+                      us <br />Enterprise
+                    </p>
+                  </div>
+                  <!-- modal left bottom container  -->
+                  <div class="flex gap-4">
+                    <div>
+                      <h2 class="text-2xl font-semibold mb-4">Features</h2>
+                      <ul class="list-inside list-disc">
+                        <li>Customizable responses</li>
+                        <li>Multilingual support</li>
+                        <li>Seamless integration</li>
+                      </ul>
+                    </div>
+                    <div>
+                      <h2 class="text-2xl font-semibold mb-4">Integrations</h2>
+                      <ul class="list-inside list-disc">
+                        <li>FB Messenger</li>
+                        <li>Slack</li>
+                        <li>Telegram</li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+                <!-- modal right side container  -->
+                <div
+                  style="border: 1px solid #e7e7e7"
+                  class="rounded-2xl p-6 text-center"
+                >
+                  <div>
+                    <img
+                      class="w-full rounded-2xl"
+                      src="https://www.datanami.com/wp-content/uploads/2023/01/chat_gpt_shutterstock_Ebru-Omer.jpg"
+                      alt=""
+                    />
+                  </div>
+                  <div>
+                    <h2 class="text-2xl font-semibold mt-6 mb-4">
+                      Hi, how are you doing today?
+                    </h2>
+                    <p>
+                      I'm doing well, thank you for asking. How can I <br />
+                      assist you today?
+                    </p>
+                  </div>
+                </div>
+              </div>
+              <div class="modal-action absolute top-[-10px] right-3">
+                <!-- if there is a button in form, it will close the modal -->
+                <button class="btn btn-circle">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    class="h-6 w-6"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M6 18L18 6M6 6l12 12"
+                    />
+                  </svg>
+                </button>
+              </div>
+            </form>
+          </dialog>
           </div>
       </div>
         
@@ -70,6 +174,9 @@ const displayCards = (aiCard, moreClicked) => {
 
 }
 
+const buttonCheck = (target) => {
+    console.log(target)
+}
 
 const loadingSign = () =>{
     loadingCircle.classList.remove('hidden');
@@ -83,3 +190,16 @@ const seeAllLoader = () => {
 
 loadCards()
 
+
+const modalInfoLoader = async () => {
+    const response = await fetch('https://openapi.programming-hero.com/api/ai/tool/01');
+    const data = await response.json();
+    console.log(data.data);
+
+}
+
+
+const modalOpener = () =>{
+    
+}
+modalInfoLoader()
