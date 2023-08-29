@@ -1,16 +1,24 @@
 const itemContainer = document.getElementById('item-container');
-const loadingCircle = document.getElementById('loading-circle')
+const loadingCircle = document.getElementById('loading-circle');
+const moreButton = document.getElementById('btn-more');
 
-const loadCards = async () =>{
+const loadCards = async (moreClicked) =>{
     loadingSign();
     const response = await fetch(`https://openapi.programming-hero.com/api/ai/tools`);
     const data = await response.json();
-    displayCards(data.data.tools);
+    displayCards(data.data.tools, moreClicked);
 }
 
 
-const displayCards = (aiCard) => {
-    aiCard = aiCard.slice(0,6);
+const displayCards = (aiCard, moreClicked) => {
+    
+    if(!moreClicked){
+        aiCard = aiCard.slice(0,6);
+    }
+    else{
+        itemContainer.innerHTML = '';
+    }
+    
     aiCard.forEach(card =>{
         console.log(card.image);
         const cardDiv = document.createElement('div');
@@ -36,7 +44,9 @@ const displayCards = (aiCard) => {
           <div class="flex justify-between items-center">
               <div>
                   <h2 class="text-2xl font-semibold mb-4">${card.name}</h2>
-                  <p class="font-medium">Date</p>
+                  <div class="font-medium flex">
+                  <img src="frame.svg" alt=""> <span class="ml-2"> 11/01/2022</span>
+              </div>
               </div>
               <button class="btn btn-circle">
               <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
@@ -54,6 +64,8 @@ const displayCards = (aiCard) => {
         )
 
     loadingCircle.classList.add('hidden');
+    moreButton.classList.remove('hidden');
+
     
 
 }
@@ -62,6 +74,12 @@ const displayCards = (aiCard) => {
 const loadingSign = () =>{
     loadingCircle.classList.remove('hidden');
 }
+
+
+const seeAllLoader = () => {
+    loadCards(true);
+}
+
 
 loadCards()
 
