@@ -10,7 +10,7 @@ const loadCards = async () =>{
 
 
 const displayCards = (aiCard) => {
-    
+    aiCard = aiCard.slice(0,6);
     aiCard.forEach(card =>{
         console.log(card.image);
         const cardDiv = document.createElement('div');
