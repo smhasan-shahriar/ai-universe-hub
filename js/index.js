@@ -21,7 +21,9 @@ const displayCards = (aiCard, moreClicked) => {
     
 
     aiCard.forEach(card =>{
-        console.log(card.image);
+
+       
+        
         
         const cardDiv = document.createElement('div');
         cardDiv.innerHTML = `
@@ -35,19 +37,16 @@ const displayCards = (aiCard, moreClicked) => {
           <!-- text container  -->
           <div>
               <h2 class="text-2xl font-semibold mb-4">Features</h2>
-              <ol class="list-decimal list-inside">
-                  <li>Natural language processing</li>
-                  <li>Contextual understanding</li>
-                  <li>Text generation</li>
+              <ol id="ol_${card.id}" class="list-decimal list-inside">
               </ol>
           </div>
           <hr>
           <!-- card footer  -->
           <div class="flex justify-between items-center">
               <div>
-                  <h2 class="text-2xl font-semibold mb-4">${card.name}</h2>
+                  <h2 class="text-2xl font-semibold mb-4">${card.published_in}</h2>
                   <div class="font-medium flex">
-                  <img src="frame.svg" alt=""> <span class="ml-2"> 11/01/2022</span>
+                  <img src="frame.svg" alt=""> <span class="ml-2">${card.name}</span>
               </div>
               </div>
               <button class="btn btn-circle" onclick="modalInfoLoader('${card.id}', this); my_modal_${card.id}.showModal()">
@@ -62,14 +61,26 @@ const displayCards = (aiCard, moreClicked) => {
       </div>
         
         `
-
         itemContainer.appendChild(cardDiv)
+        const featureList = document.getElementById(`ol_${card.id}`)
+        card.features.forEach(item=>{
+          const li = document.createElement('li');
+          li.innerText = item;
+          featureList.appendChild(li);
+          
+        })
+        
+        
+        
+      
     }
-
+    
+   
         )
 
     loadingCircle.classList.add('hidden');
     moreButton.classList.remove('hidden');
+
 
     
 
@@ -101,7 +112,7 @@ const modalInfoLoader = async (id , target) => {
 
 
 const modalOpener = (item, target) =>{
-    
+
     target.parentNode.childNodes[5].innerHTML = `<form method="dialog" class="modal-box max-w-[1250px] relative">
     <!-- modal left and right side container  -->
     <div class="grid grid-cols-2 gap-5 p-28">
@@ -142,18 +153,12 @@ const modalOpener = (item, target) =>{
         <div class="flex gap-4">
           <div>
             <h2 class="text-2xl font-semibold mb-4">Features</h2>
-            <ul class="list-inside list-disc">
-              <li>Customizable responses</li>
-              <li>Multilingual support</li>
-              <li>Seamless integration</li>
+            <ul id="list${item.id}" class="list-inside list-disc">
             </ul>
           </div>
           <div>
             <h2 class="text-2xl font-semibold mb-4">Integrations</h2>
-            <ul class="list-inside list-disc">
-              <li>FB Messenger</li>
-              <li>Slack</li>
-              <li>Telegram</li>
+            <ul id="integration${item.id}" class="list-inside list-disc">
             </ul>
           </div>
         </div>
@@ -201,5 +206,21 @@ const modalOpener = (item, target) =>{
       </button>
     </div>
   </form>`
-    console.log(item, target.parentNode.childNodes[5]);
+  
+    const featureList = document.getElementById(`list${item.id}`)
+    const integrationList = document.getElementById(`integration${item.id}`)
+    for(feature in item.features){
+      console.log(item.features[feature].feature_name);
+      const li = document.createElement('li');
+      li.innerText = item.features[feature].feature_name;
+      featureList.appendChild(li);
+    }
+    console.log(item.integrations)
+    item.integrations.forEach(item => {
+      const li = document.createElement('li');
+      li.innerText = item; 
+      integrationList.appendChild(li);
+    })
+
+
 }
