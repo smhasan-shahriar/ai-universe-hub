@@ -6,7 +6,16 @@ const loadCards = async (moreClicked) =>{
     loadingSign();
     const response = await fetch(`https://openapi.programming-hero.com/api/ai/tools`);
     const data = await response.json();
-    displayCards(data.data.tools, moreClicked);
+    const dataSorted = data.data.tools;
+    dataSorted.sort((a, b) => {
+      const dateA = new Date(a.published_in.split('/').reverse().join('/'));
+      const dateB = new Date(b.published_in.split('/').reverse().join('/'));
+      return dateB - dateA;
+    });
+    displayCards(dataSorted, moreClicked);
+  
+
+
 }
 
 
@@ -21,10 +30,6 @@ const displayCards = (aiCard, moreClicked) => {
     
 
     aiCard.forEach(card =>{
-
-       
-        
-        
         const cardDiv = document.createElement('div');
         cardDiv.innerHTML = `
       <div style="border-radius: 16px;
@@ -32,7 +37,7 @@ const displayCards = (aiCard, moreClicked) => {
       background: #FFF;" class="p-6 space-y-6">
           <!-- image container -->
           <div>
-              <img class="rounded-2xl h-[300px] object-cover" src="${card.image}" alt="">
+              <img class="rounded-2xl h-[300px] object-cover" src="${card?.image}" alt="">
           </div>
           <!-- text container  -->
           <div>
@@ -100,7 +105,7 @@ const seeAllLoader = () => {
 }
 
 
-loadCards()
+
 
 
 const modalInfoLoader = async (id , target) => {
@@ -224,3 +229,5 @@ const modalOpener = (item, target) =>{
 
 
 }
+
+
