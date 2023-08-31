@@ -79,12 +79,19 @@ const displayCards = (aiCard, moreClicked) => {
         
       
     }
+
+    
     
    
         )
 
+     
+      
     loadingCircle.classList.add('hidden');
     moreButton.classList.remove('hidden');
+    if(moreClicked){
+      moreButton.classList.add('hidden');
+  }
 
 
     
